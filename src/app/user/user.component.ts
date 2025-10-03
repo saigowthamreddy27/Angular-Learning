@@ -10,7 +10,16 @@ import { DUMMY_USERS } from './dummy-users';
 import { NgFor } from '@angular/common';
 
 const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length);
-
+// type User={
+//   id:string;
+//     avatar:string;
+//     name:string;
+// }
+interface User{
+  id:string;
+     avatar:string;
+   name:string;
+}
 @Component({
   selector: 'app-user',
   standalone: true,
@@ -34,10 +43,12 @@ const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length);
 //   this.selectedUser.set(DUMMY_USERS[randomIndex]);
 
 // }
+
 export class UserComponent {
-  @Input({ required: true }) id!: string;
-  @Input({ required: true }) avatar!: string;
-  @Input({ required: true }) name!: string;
+  // @Input({ required: true }) id!: string;
+  // @Input({ required: true }) avatar!: string;
+  // @Input({ required: true }) name!: string;
+  @Input({required:true}) user!:User
   @Output() select = new EventEmitter();
   //  avatar =input.required<string>;
   //  name =input.required<string>;
@@ -45,9 +56,9 @@ export class UserComponent {
   // imagePath=computed(()=>'asserts/users' this.avatar() when we are using signal we must use ()
 
   get imagePath() {
-    return 'assets/users/' + this.avatar;
+    return 'assets/users/' + this.user.avatar;
   }
   onSelectedUsers() {
-    this.select.emit(this.id);
+    this.select.emit(this.user.id);
   }
 }
